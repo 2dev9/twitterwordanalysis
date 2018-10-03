@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Analysis{% endblock %}
+{% block body %}
+<div class="jumbotron">
+  <h1>Analyze</h1>
+  <p class="lead">Find the words most used by a Twitter user</p>
+</div>
+
+<form method="POST">
+    <input name="user" placeholder="User Handle">
+    <input name="items" placeholder="Number of Tweets">
+    <input name="top" placeholder="Number of Top Words">
+    <input type="submit">
+</form>
+
+<div class="container">
+	{% if words %}
+      <h1 class="p-3">{{username}}'s Top {{top}} words in their past {{items}} tweets</h1>
+    {% endif %}
+      {% for word in words %}
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+           <div class="d-flex w-100 justify-content-between">
+             <h5 class="ml-10 w-75 mb-1">{{ word.word }}:{{word.count}}</h5>
+           </div>
+         </a>
+      </div>
+      {% endfor %}      
+</div>
+
+{% endblock %}

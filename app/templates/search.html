@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block body %}
+<div class="jumbotron">
+  <h1>Search</h1>
+  <p class="lead">Enter a Twitter username to search their most recent Tweets</p>
+  <small>Click on a Tweet to navigate to it</small>
+</div>
+
+<form method="POST">
+    <input name="text" placeholder="User Handle">
+    <input type="submit">
+</form>
+
+<div class="container">
+	{% if tweets %}
+      <h1 class="p-3">{{username}}'s Last 30 Tweets</h1>
+    {% endif %}
+      {% for tweet in tweets %}
+      <div class="list-group">
+        <a href="{{tweet.url[0]}}" class="list-group-item list-group-item-action flex-column align-items-start">
+           <div class="d-flex w-100 justify-content-between">
+             <img src="{{tweet.headshot_url}}" class="w-12 p-1 float-left image-thumbnail">  
+             <h5 class="ml-10 w-75 mb-1">{{ tweet.tweet }}</h5>
+             <small>{{ tweet.created_at }}</small>
+           </div>
+         </a>
+      </div>
+      {% endfor %}      
+</div>
+
+{% endblock %}
+
